@@ -1,0 +1,125 @@
+# Titles, Captions, and Tables
+
+## Every figure needs a title
+
+- A visualization conveys information and makes a point, so give it context
+- The title says what the figure is about and what point it makes
+- In a printed document the title is the first part of the caption, below the figure
+- A figure can have only one title
+- Web or slide figures can carry the title inside the image instead
+
+## The title is not a description
+
+:::: {.columns}
+::: {.column width="45%"}
+- Good: "Corruption and human development: the most developed countries have the least corruption"
+- Not: "This figure shows how corruption is related to human development"
+- A title can be a short sentence making a clear assertion
+- Then add data source and other details
+
+:::
+::: {.column width="55%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-corruption-development", fig_corruption_development(),
+          w = 7, h = 4.9, x = 7.4, y = 2, width = 8.4)
+```
+
+## Axis and legend titles
+
+:::: {.columns}
+::: {.column width="50%"}
+- Axes and legends need titles too
+- State the variable *and* its units: body mass (g), head length (mm), skull size (mm)
+- Legend titles explain what color and size encode
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-blue-jays-bubbles", fig_blue_jays_bubbles(),
+          w = 5.5, h = 4.2, x = 8, y = 2, width = 7.5)
+```
+
+## When a title can be omitted
+
+:::: {.columns}
+::: {.column width="50%"}
+- A legend with "female" and "male" is self-explanatory
+- Country names and movie titles need no "country" or "movie" title
+- Years on an x axis need no title here: context is clear
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-tech-stocks-minimal-labeling", fig_tech_stocks_minimal_labeling(),
+          w = 5, h = 3.4, x = 8, y = 2, width = 7.5)
+```
+
+## But do not push it too far
+
+:::: {.columns}
+::: {.column width="50%"}
+- Without a y axis title, the reader cannot tell what the values are
+- Do not assume the plot title or subtitle defines the axes
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-tech-stocks-no-axis-titles", fig_tech_stocks_no_axis_titles(),
+          w = 5, h = 3.4, x = 8, y = 2, width = 7.5)
+```
+
+## And do not overdo it either
+
+:::: {.columns}
+::: {.column width="50%"}
+- "company" on a legend of well-known companies adds nothing
+- "time (years AD)" is awkward for a few recent years
+- Excessive labeling is clutter
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-tech-stocks-overlabeled", fig_tech_stocks_overlabeled(),
+          w = 5, h = 3.4, x = 8, y = 2, width = 7.5)
+```
+
+## Omitting the axis altogether
+
+- Pie charts, treemaps, and mosaic plots often have no explicit axes
+- Bar charts can drop an axis if meaning is otherwise clear
+- Dropping tick labels signals that qualitative features matter more than exact values
+
+## Tables: layout rules
+
+- No vertical lines
+- No horizontal lines between data rows (a line under the header or around the table is fine)
+- Left-align text columns
+- Right-align number columns, with the same number of decimals throughout
+- Center single-character columns
+- Align headers with their data
+- To guide the eye, use alternating light shading, not lines
+
+## Captions: figures below, tables above
+
+- Readers look at a figure first and read the caption for context, so the caption goes below
+- Tables are read like text, top to bottom, so the caption goes above

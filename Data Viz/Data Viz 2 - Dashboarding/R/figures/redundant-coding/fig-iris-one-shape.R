@@ -1,0 +1,47 @@
+# from dataviz ch. 20 (redundant coding)
+fig_iris_one_shape <- function() {
+  breaks = c("setosa", "virginica", "versicolor")
+  labels = paste0("Iris ", breaks)
+
+  iris_scatter_base <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, fill = Species, color = Species)) + 
+      scale_color_manual(
+        values = darken(c("#E69F00", "#56B4E9", "#009E73"), 0.3),
+        breaks = breaks,
+        labels = labels,
+        name = NULL
+      ) +
+      scale_fill_manual(
+        values = c("#E69F0080", "#56B4E980", "#009E7380"),
+        breaks = breaks,
+        labels = labels,
+        name = NULL
+      ) +
+      scale_x_continuous(
+        limits = c(3.95, 8.2), expand = c(0, 0),
+        labels = c("4.0", "5.0", "6.0", "7.0", "8.0"),
+        name = "sepal length"
+      ) +
+      scale_y_continuous(
+        limits = c(1.9, 4.6), expand = c(0, 0),
+        name = "sepal width"
+      )
+
+  iris_scatter <- iris_scatter_base +
+    geom_point(
+      size=2.5, shape=21, stroke = 0.5,
+      position = position_jitter(
+        width = 0.01 * diff(range(iris$Sepal.Length)),
+        height = 0.01 * diff(range(iris$Sepal.Width)),
+        seed = 3942
+      )
+    ) +
+    theme_dviz_grid() +
+    theme(
+      legend.title.align = 0.5,
+      legend.text = element_text(face = "italic"),
+      legend.spacing.y = unit(3.5, "pt"),
+      plot.margin = margin(7, 7, 3, 1.5)
+    )
+
+  stamp_bad(iris_scatter)
+}

@@ -1,0 +1,202 @@
+# Balance the Data and the Context
+
+## Data ink and non-data ink
+
+- Data elements: points, bars, shaded areas
+- Context elements: axes, ticks, labels, legends, annotations, grids
+- Tufte: "Maximize the data-ink ratio, *within reason*"
+- The qualifier is the point: remove clutter, but do not strip context
+
+## Too much non-data ink
+
+:::: {.columns}
+::: {.column width="50%"}
+- Body fat vs. height of male Australian athletes
+- Frames around the figure, panel, and legend
+- A heavy grid pulls attention from the data
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-aus-athletes-grid-bad", fig_aus_athletes_grid_bad(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Cleaned up
+
+:::: {.columns}
+::: {.column width="50%"}
+- Frames removed, minor grid lines removed
+- Major grid lines in light gray, behind the data
+- Open grid with no axis lines signals that values could extend beyond the shown range
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-aus-athletes-grid-good", fig_aus_athletes_grid_good(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Too little non-data ink
+
+:::: {.columns}
+::: {.column width="50%"}
+- Faint axis labels and titles are hard to see
+- Points seem to float in space
+- The legend is not set apart from the data
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-aus-athletes-min-bad", fig_aus_athletes_min_bad(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Small multiples need structure
+
+:::: {.columns}
+::: {.column width="50%"}
+- Without facet frames or a baseline, bars seem to float
+- It is hard to tell which part belongs to which facet
+- Fix: a gray panel background per facet and thin horizontal grid lines
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-titanic-facets-bad", fig_titanic_facets_bad(),
+          w = 4, h = 5, x = 9.5, y = 1.4, width = 5.5)
+```
+
+## Background grids: the ggplot2 default
+
+:::: {.columns}
+::: {.column width="50%"}
+- White grid on gray background: one visual unit, but a prominent grid
+- Here the grid overpowers the data lines
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-price-plot-ggplot-default", fig_price_plot_ggplot_default(),
+          w = 5, h = 3.4, x = 8, y = 2, width = 7.5)
+```
+
+## No grid, no anchor
+
+:::: {.columns}
+::: {.column width="50%"}
+- Without any grid, the lines are not anchored
+- We cannot tell how far they end above or below the index value of 100
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-price-plot-no-grid", fig_price_plot_no_grid(),
+          w = 5, h = 3.4, x = 8, y = 2, width = 7.5)
+```
+
+## Add a reference line
+
+:::: {.columns}
+::: {.column width="50%"}
+- At minimum, one thin line at the index value of 100
+- It gives context for the whole time span
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-price-plot-refline", fig_price_plot_refline(),
+          w = 5, h = 3.4, x = 8, y = 2, width = 7.5)
+```
+
+## Or a minimal grid
+
+:::: {.columns}
+::: {.column width="50%"}
+- Thin horizontal lines at the major y ticks
+- Draw lines orthogonal to the direction in which the numbers vary
+- No prominent axis lines are needed
+- For horizontal bars, use vertical grid lines
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-price-plot-hgrid", fig_price_plot_hgrid(),
+          w = 5, h = 3.4, x = 8, y = 2, width = 7.5)
+```
+
+## Paired data: draw the diagonal
+
+:::: {.columns}
+::: {.column width="50%"}
+- Gene expression in mutant vs. wild-type bacteriophage T7
+- The relevant reference is x = y, not a grid
+- Genes above or below the line are higher or lower in the mutant
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-gene-expression-diagonal", fig_gene_expression_diagonal(),
+          w = 4.2, h = 4.2, x = 9, y = 1.6, width = 6.3)
+```
+
+## Paired data: a grid obscures the point
+
+:::: {.columns}
+::: {.column width="50%"}
+- A background grid hides which genes are above or below x = y
+- Adding the diagonal on top of the grid makes the figure too busy
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-gene-expression-grid", fig_gene_expression_grid(),
+          w = 4.2, h = 4.2, x = 9, y = 1.6, width = 6.3)
+```
+
+## Summary
+
+- Both too much and too little non-data ink hurt
+- Data should be the main emphasis, with enough context to read it
+- Be judicious with grid lines: show only the ones most informative for this plot
+- Light, minimal grids on white are a good default

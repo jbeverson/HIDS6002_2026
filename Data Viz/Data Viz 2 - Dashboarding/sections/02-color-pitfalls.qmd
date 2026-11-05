@@ -1,0 +1,161 @@
+# Common Pitfalls of Color Use
+
+## Color needs a job
+
+- Color is powerful, but poor choices can ruin a good figure
+- Color must serve a purpose, be clear, and not distract
+- Four pitfalls:
+    - Encoding too much or irrelevant information
+    - Non-monotonic color scales for data values
+    - Overly saturated, gratuitous color
+    - Not designing for color-vision deficiency
+
+## Too many colors
+
+:::: {.columns}
+::: {.column width="50%"}
+- Population growth vs. population size, 51 states, each its own color
+- Matching legend to points means constant back-and-forth
+- Colors are distinguishable in principle, but the task is too burdensome
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-popgrowth-colored", fig_popgrowth_colored(),
+          w = 5.5, h = 7.4, x = 9.5, y = 1.2, width = 5.6)
+```
+
+## Use direct labels instead
+
+:::: {.columns}
+::: {.column width="50%"}
+- Qualitative scales work best with 3 to 5 categories; at 8 to 10 or more they fail
+- Color by region (4 colors) and label a subset of states directly
+- Leave most points unlabeled to avoid crowding
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-popgrowth-labeled", fig_popgrowth_labeled(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Coloring for the sake of coloring
+
+:::: {.columns}
+::: {.column width="50%"}
+- A rainbow of bars adds no information
+- The colors are also too saturated: large areas of intense color pull the eye away from the labels and bar ends
+- Avoid large filled areas of overly saturated color
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-popgrowth-rainbow-bars", fig_popgrowth_rainbow_bars(),
+          w = 4.5, h = 5.4, x = 9.5, y = 1.3, width = 5.8)
+```
+
+## Non-monotonic color scales {.t}
+
+- A sequential scale must show which values are larger, and by how much
+- Rainbow fails both tests
+- In grayscale it goes dark, light, very dark, then medium
+- Its lightest third covers yellow through cyan
+
+```{r}
+#| output: asis
+place_fig("fig-rainbow-desaturated", fig_rainbow_desaturated(),
+          w = 7.14, h = 2, x = 4.5, y = 5.3, width = 11)
+```
+
+## Rainbow scales distort data
+
+:::: {.columns}
+::: {.column width="50%"}
+- Percent identifying as white, Texas counties
+- Rainbow highlights arbitrary features of the data (here, around 75%)
+- Also too saturated for comfortable viewing
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-texas-rainbow", fig_texas_rainbow(),
+          w = 6, h = 4.5, x = 8, y = 2, width = 7.5)
+```
+
+## Color-vision deficiency (cvd) {.t}
+
+- A good share of readers cannot distinguish some colors
+- Sequential scales (dark to light) are generally safe
+- Diverging scales are riskier: red and green look nearly identical to deutans and protans
+
+```{r}
+#| output: asis
+place_fig("fig-red-green-cvd", fig_red_green_cvd(),
+          w = 7.14, h = 2, x = 4.5, y = 5.3, width = 11)
+```
+
+## A cvd-safe diverging scale {.t}
+
+- ColorBrewer PiYG looks red-green to most readers
+- It works because the reddish end is really pink (red + blue) and the greenish end contains yellow
+- The difference in blue is visible to deutans and protans
+
+```{r}
+#| output: asis
+place_fig("fig-piyg-cvd", fig_piyg_cvd(),
+          w = 7.14, h = 2, x = 4.5, y = 5.3, width = 11)
+```
+
+## The Okabe-Ito qualitative palette
+
+:::: {.columns}
+::: {.column width="50%"}
+- Orange #E69F00
+- Sky blue #56B4E9
+- Bluish green #009E73
+- Yellow #F0E442
+- Blue #0072B2
+- Vermilion #D55E00
+- Reddish purple #CC79A7
+- Black #000000
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+## Safe scales are not magic
+
+:::: {.columns}
+::: {.column width="50%"}
+- Small elements are hard to distinguish, especially under cvd: thin lines, small points
+- Large areas are easier than thin lines
+- Test your figures in a cvd simulator, not just with safe palettes
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-colors-thin-lines", fig_colors_thin_lines(),
+          w = 7.14, h = 5.7, x = 8, y = 2, width = 7.5)
+```

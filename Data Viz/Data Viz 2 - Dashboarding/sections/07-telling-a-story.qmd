@@ -1,0 +1,146 @@
+# Telling a Story and Making a Point
+
+## Visualization is communication
+
+- Most visualization aims to convey an insight to an audience
+- Audiences need a clear and engaging story
+- Use facts and logic to get them interested and excited
+- Stories need not be at odds with science
+
+## What is a story?
+
+- Observations or events in a specific order that create an emotional reaction
+- Tension builds, then is resolved
+- Standard format: **Opening, Challenge, Action, Resolution**
+- A single static figure cannot carry a story arc; figures fit *into* it
+
+## Challenge: preprints in q-bio
+
+:::: {.columns}
+::: {.column width="50%"}
+- Monthly submissions to arXiv q-bio, log y axis
+- Rapid growth through 2014, then almost none
+- Why did it stop?
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-qbio-monthly-growth", fig_qbio_monthly_growth(),
+          w = 5.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Resolution: bioRxiv
+
+:::: {.columns}
+::: {.column width="50%"}
+- bioRxiv launched in Nov 2013, backed by Cold Spring Harbor Laboratory Press
+- Biologists moved to the dedicated server and q-bio levelled off
+- The first figure is contained in the second, but two steps make a stronger story
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-qbio-biorxiv-growth", fig_qbio_biorxiv_growth(),
+          w = 5.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Make a figure for the generals
+
+- Program managers asked for few figures, each immediately clear to a busy general
+- Generals are busy, not unintelligent: no one has 30 minutes to decode a figure
+- Modern software makes it tempting to pile on dimensions
+- Show the simplest figure that makes the point
+- Example: if the story is airline delays, a simple bar chart of mean arrival delay beats a bubble plot with trend lines
+
+## Build up to complex figures
+
+- Never jump straight to a dense figure
+- Show a simplified version first, then the full thing
+- Especially for small multiples: show one panel, then the grid
+- Equally good advice for presentations
+
+## Make figures memorable
+
+:::: {.columns}
+::: {.column width="50%"}
+- Simple bars are clear but can look generic
+- More visually distinct figures are more memorable, but can be harder to read
+- Add visual elements that reflect the data: pictograms or isotype plots, where one icon equals a fixed amount
+- Highlight what matters, e.g. one bar in color and the rest in gray
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-petownership-bar", fig_petownership_bar(),
+          w = 5.5, h = 3.4, x = 8, y = 2, width = 7.5)
+```
+
+## Consistent, but not repetitive
+
+:::: {.columns}
+::: {.column width="50%"}
+- Figures in one story should look like they belong together
+- Reuse colors, fonts, and highlights
+- But repeating the same plot type for every variable bores the audience
+- This composite shows the same bar plot again and again
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-athletes-composite-repetitive", fig_athletes_composite_repetitive(),
+          w = 6, h = 7, x = 9.3, y = 1.2, width = 6.2)
+```
+
+## Repetitive: stock price twice
+
+:::: {.columns}
+::: {.column width="50%"}
+- Facebook alone, then all four companies
+- The second plot contains the first
+- Redundant
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-tech-stocks-repetitive", fig_tech_stocks_repetitive(),
+          w = 4.5, h = 5.4, x = 9.5, y = 1.3, width = 5.5)
+```
+
+## Varied: price and percent increase
+
+:::: {.columns}
+::: {.column width="50%"}
+- Switch to a bar chart of percent increase
+- Same story, different view
+- Gray for the others, blue for Facebook
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-tech-stocks-diverse", fig_tech_stocks_diverse(),
+          w = 4.5, h = 5.4, x = 9.5, y = 1.3, width = 5.5)
+```

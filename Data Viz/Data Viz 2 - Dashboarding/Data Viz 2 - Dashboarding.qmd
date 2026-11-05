@@ -1,0 +1,38 @@
+---
+title: "Data Visualization with R: Dashboarding"
+subtitle: "Principles of Figure Design"
+author: "Jordan Everson"
+date: "11/05/2026"
+format:
+  beamer:
+    aspectratio: 169
+    pdf-engine: xelatex
+    mainfont: "Georgia"          # or "Adobe Caslon Pro" if you have it installed
+    sansfont: Arial
+    include-in-header:
+    - header.tex
+    - georgetown.tex
+    fontsize: 12pt
+    section-titles: true
+knitr:
+  opts_chunk:
+    dev: cairo_pdf
+---
+
+
+```{r}
+#| include: false
+source("R/setup.R")
+source("R/layouts.R")
+for (f in list.files("R/figures", pattern = "\\.R$",
+                     full.names = TRUE, recursive = TRUE)) source(f)
+```
+
+{{< include sections/00-introduction.qmd >}}
+{{< include sections/01-proportional-ink.qmd >}}
+{{< include sections/02-color-pitfalls.qmd >}}
+{{< include sections/03-redundant-coding.qmd >}}
+{{< include sections/04-titles-captions-tables.qmd >}}
+{{< include sections/05-balance-data-context.qmd >}}
+{{< include sections/06-axis-labels.qmd >}}
+{{< include sections/07-telling-a-story.qmd >}}

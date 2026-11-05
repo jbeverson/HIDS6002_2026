@@ -1,0 +1,20 @@
+## Acknowledgement
+
+Content Adapted directly from [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/index.html) by Claus O. Wilke, 2020
+
+## Roadmap
+:::: {.columns align=center}
+
+::: {.column width="58%"}
+- Principles of figure design
+- Proportional ink and color pitfalls
+- Redundant coding, titles, captions, and tables
+:::
+
+::: {.column width="40%"}
+- Balancing data and context
+- Larger axis labels
+- Telling a story and making a point
+:::
+::::
+

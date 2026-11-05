@@ -1,0 +1,209 @@
+# The Principle of Proportional Ink
+
+## Proportional ink
+
+- Many graphics encode a value in the *extent* of an element: bars, rectangles, shaded areas
+- A bar that starts at 0 and ends at the value encodes it twice: in its length and its endpoint
+- If the bar starts elsewhere, the two cues contradict each other
+- **Principle of proportional ink:** the sizes of shaded areas must be proportional to the data values they represent
+- Violations are common in the popular press and in finance
+
+## Bars must start at zero
+
+:::: {.columns}
+::: {.column width="50%"}
+- Median income, five Hawaii counties
+- Bars start at $50,000: Hawaii County looks very poor, Honolulu very rich
+- The endpoints are correct, but the *bar height* shows the excess over an arbitrary baseline
+- Readers perceive bar height, not endpoint position
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-hawaii-income-bars-bad", fig_hawaii_income_bars_bad(),
+          w = 4.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Bars must start at zero
+
+:::: {.columns}
+::: {.column width="50%"}
+- Same data, axis from $0
+- Counties differ, but nowhere near as much as the truncated axis implied
+- Rule: bars on a linear scale always start at 0
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-hawaii-income-bars-good", fig_hawaii_income_bars_good(),
+          w = 4.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Bars can show differences, if explicit
+
+:::: {.columns}
+::: {.column width="50%"}
+- Bars and areas are fine for differences, as long as the difference is what is shown
+- Change in median income, 2010 to 2015
+- Negative values run in the opposite direction, down from 0
+- Kalawao (<100 residents) swings widely with a few movers
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-hawaii-income-change", fig_hawaii_income_change(),
+          w = 4.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Shaded areas have the same problem
+
+:::: {.columns}
+::: {.column width="50%"}
+- Facebook stock price, Oct 2016 to Jan 2017
+- Axis starts at $110, so the shading suggests a collapse
+- Shading emphasizes the distance from the axis, which reads as the price itself
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-fb-stock-drop-bad", fig_fb_stock_drop_bad(),
+          w = 4.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Shaded areas have the same problem
+
+:::: {.columns}
+::: {.column width="50%"}
+- Axis from $0 to $150 shows the true size of the drop
+- Less exciting story, but an accurate one
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-fb-stock-drop-good", fig_fb_stock_drop_good(),
+          w = 4.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Logarithmic axes: bars for amounts fail
+
+:::: {.columns}
+::: {.column width="50%"}
+- GDP of Oceania countries, 2007
+- On a log scale, 0 lies infinitely far away
+- Bars start at an arbitrary value (here 0.3 billion USD), so lengths are meaningless
+- Pushing the origin further left only makes bars longer
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-oceania-gdp-logbars", fig_oceania_gdp_logbars(),
+          w = 6, h = 3.2, x = 8, y = 2.3, width = 7.5)
+```
+
+## Logarithmic axes: use dots for amounts
+
+:::: {.columns}
+::: {.column width="50%"}
+- A dot encodes the value only by its position
+- Place country names next to the dots, not along the axis, so no distance between label and dot suggests a magnitude
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-oceania-gdp-dots", fig_oceania_gdp_dots(),
+          w = 6, h = 3.2, x = 8, y = 2.3, width = 7.5)
+```
+
+## Logarithmic axes: bars for ratios
+
+:::: {.columns}
+::: {.column width="50%"}
+- Bars on a log scale represent *ratios* and start at 1
+- GDP relative to Papua New Guinea
+- New Zealand > 8x, Australia > 64x
+- Tonga and Micronesia < 1/16
+- Bars above 1 go one way, bars below 1 the other
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-oceania-gdp-relative", fig_oceania_gdp_relative(),
+          w = 6, h = 3.2, x = 8, y = 2.3, width = 7.5)
+```
+
+## Direct area visualizations
+
+:::: {.columns}
+::: {.column width="50%"}
+- Pie charts and treemaps encode the value directly in area
+- Both wedge angle and area are proportional to the value, so they satisfy proportional ink
+- Example: inhabitants of Rhode Island counties
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-ri-pop-pie", fig_ri_pop_pie(),
+          w = 4.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Area is harder to judge than length
+
+:::: {.columns}
+::: {.column width="50%"}
+- We judge distances better than areas
+- A value encoded as one distance (bar length) is read more accurately than one encoded by two distances forming an area
+- The gap between Providence and the other counties looks larger as bars
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-ri-pop-bars", fig_ri_pop_bars(),
+          w = 5.5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Takeaways
+
+- Bars on a linear scale start at 0
+- Bars on a log scale show ratios and start at 1
+- If a baseline is arbitrary, use dots instead of bars
+- Prefer length over area when readers must compare values precisely

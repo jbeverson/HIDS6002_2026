@@ -1,0 +1,106 @@
+# Use Larger Axis Labels
+
+## If you remember one thing
+
+- Pay attention to axis labels, tick labels, and other annotations
+- Chances are they are too small
+- Most plotting software has poor defaults
+- Using the defaults is almost certainly a poor choice
+
+## Too small
+
+:::: {.columns}
+::: {.column width="50%"}
+- Axis labels, tick labels, and legend text are barely legible
+- We see figures like this all the time
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-aus-athletes-small", fig_aus_athletes_small(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Better, still too small
+
+:::: {.columns}
+::: {.column width="50%"}
+- Moving in the right direction
+- But the figure is not balanced: text is small relative to the points
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-aus-athletes-ugly", fig_aus_athletes_ugly(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Well balanced
+
+:::: {.columns}
+::: {.column width="50%"}
+- Text is clearly visible and fits the figure size
+- Text and symbols scale together
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-aus-athletes-good", fig_aus_athletes_good(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Too big
+
+:::: {.columns}
+::: {.column width="50%"}
+- Large text can be right if the figure will be shrunk
+- But here the points are too small relative to the text
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-aus-athletes-big-ugly", fig_aus_athletes_big_ugly(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Big and balanced
+
+:::: {.columns}
+::: {.column width="50%"}
+- Larger text and larger points
+- Meant to be scaled down, where it looks just fine
+- Test at the size at which the figure will actually be seen
+
+:::
+::: {.column width="50%"}
+:::
+::::
+
+```{r}
+#| output: asis
+place_fig("fig-aus-athletes-big-good", fig_aus_athletes_big_good(),
+          w = 5, h = 3.6, x = 8, y = 2, width = 7.5)
+```
+
+## Why labels end up too small
+
+- We preview figures large, on high-resolution monitors
+- Small text looks fine at that size
+- The figure is then shrunk to fit a page or slide
+- Design for the final size
