@@ -44,6 +44,7 @@ Every ggplot has three parts: **data**, **aesthetics** (`aes()`, which maps vari
 ```{r}
 ggplot(patients, aes(x = baseline_sbp, y = sbp_6mo)) +
   geom_point() +
+  labs(x="Baseline Systolic Blood Pressure", y="SBP after 6 months")
   geom_abline(slope = 1, intercept = 0, linetype = "dashed")
 ```
 
@@ -54,8 +55,9 @@ ggplot(patients, aes(x = baseline_sbp, y = sbp_6mo)) +
 Position is not the only aesthetic. Here, `color` shows a *qualitative* variable: the device each patient uses.
 
 ```{r}
-ggplot(patients, aes(x = baseline_sbp, y = sbp_6mo, color = device_type )) +
-  geom_point(size = 2, alpha = 0.7) 
+ggplot(patients, aes(x = baseline_sbp, y = sbp_6mo, size = total_readings*2, color = device_type, shape=age_group )) +
+  geom_point(size = 2, alpha = 0.7) + 
+scale_color_viridis_d()
 ```
 
 **Your turn:** Try each of these, one at a time, and notice which ones work well:
@@ -70,7 +72,7 @@ ggplot(patients, aes(x = baseline_sbp, y = sbp_6mo, color = device_type )) +
 A bar plot shows an amount for each category. Here, the number of patients enrolled at each clinic.
 
 ```{r}
-ggplot(clinic_summary, aes(x = clinic, y = n_patients)) +
+ggplot(clinic_summary, aes(x = n_patients , y = reorder(clinic, n_patients))) +
   geom_col()
 ```
 
@@ -96,7 +98,7 @@ ggplot(clinic_device, aes(x = clinic, y = pct_controlled, fill = device_type)) +
 With many groups, grouped bars get crowded. A heatmap maps the value to color instead of position. Here, engagement (readings per patient per week) for every clinic and month.
 
 ```{r}
-ggplot(clinic_month, aes(x = month, y = clinic, fill = mean_readings_wk)) +
+ggplot(clinic_month, aes(x = month, y = reorder(clinic, ifelse(month == max(month), mean_readings_wk, NA), FUN = function(x) mean(x, na.rm = TRUE)), fill = mean_readings_wk)) +
   geom_tile(color = "white") +
   scale_fill_viridis_c(option = "magma") +
   labs(x = NULL, y = NULL, fill = "Readings\nper week")
@@ -110,7 +112,7 @@ When a whole splits into only two parts, a stacked bar works well. Here, the sha
 
 ```{r}
 ggplot(quarter_control, aes(x = quarter, y = pct, fill = status)) +
-  geom_col(position = position_stack(reverse = TRUE)) +
+  geom_col(position = "dodge") +
   geom_hline(yintercept = 50, linetype = "dashed") +
   scale_fill_viridis_d(end = 0.85) +
   labs(x = NULL, y = "Share of patients (%)", fill = NULL)

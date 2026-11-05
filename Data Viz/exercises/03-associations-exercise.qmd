@@ -46,6 +46,7 @@ Each dot is a patient. The dashed line is "no change", so patients above it impr
 ```{r}
 ggplot(patients, aes(x = total_readings, y = sbp_reduction)) +
   geom_point(alpha = 0.5) +
+  geom_smooth(method = "gmm", se = FALSE) +
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Readings submitted in first 26 weeks",
        y = "Systolic BP reduction (mmHg)")
@@ -118,6 +119,7 @@ The clinic is still the unit of analysis. Let's plot the relationship between re
 ```{r}
 ggplot(clinic_summary, aes(x = mean_readings_wk, y = pct_controlled)) +
   geom_point(aes(size = n_patients), alpha = 0.6) +
+  geom_text(aes(label = clinic), nudge_x = 1, check_overlap = TRUE) +
   labs(x = "Mean readings per patient per week",
        y = "Patients with controlled BP at 6 months (%)",
        size = "Patients")
